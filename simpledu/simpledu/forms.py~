@@ -1,0 +1,20 @@
+
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordFiled, SubmitField, BooleanField
+from wtforms.validators import Length,Email,EqualTo,DataRequired
+
+class RegisterForm(FlaskForm):
+    username = StringField('yonghuming', validators=[DataRequired(), Length(3,24)])
+    email = StringField('youxiang', validators=[DataRequired(), Email()])
+    password = PasswordField('mima', validators=[DataRequired(),Length(6,24)])
+    repeat_password = PasswordField('chongfumima', validators=[DataRequired(),EqualTo('password')])
+    submit = SubmitField('提交')
+
+class LoginForm(FlaskForm):
+    email = StringField('luoji', validators=[DataRequired(), Email()])
+    password = PasswordField('mima', validators=[DataRequired(), Length(6,24)])
+    remember_me = BooleanField('jizhuwo')
+    submit = SubmitField('tijiao')
+
+
+
