@@ -1,0 +1,16 @@
+
+{% from 'macro.html' import course_item %}
+<div> {{ course_item(course) }} </div>
+<p>{{ '=' * 20 }}</p>
+<div> {{ course_item(course, type="luoplus") }}</div>
+
+{% extends 'base.html' %}
+{% from 'macro.html' import course_item %}
+
+{% block header %}
+    <h1> header </h1>
+{% endblock %}
+
+{% block content %}
+    {{ course_item(course) }}
+{% endblock %}

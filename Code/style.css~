@@ -1,0 +1,23 @@
+h1 {
+    color:red;
+    font-size:40px;
+}
+h1, h2, h3, h4, h5, h6{
+    color:red;
+}
+body {
+    color:green;
+}
+li strong{
+    color:red;
+}
+
+#pid a{
+    color:#00755f;
+}
+.container {
+    color:red;
+}
+[title=foo] {
+    color: red;
+}
