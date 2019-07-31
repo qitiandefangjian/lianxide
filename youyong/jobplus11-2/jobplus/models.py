@@ -1,0 +1,35 @@
+from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+db = SQLAlchemy()
+
+class Base(db.Model):
+    __abstract__ = True  
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime,
+                           default=datetime.utcnow,
+                           onupdate=datetime.utcnow)
+
+class User(UserMixin,Base):
+    __tablename__ = 'users'
+    ADMIN_ROLE = '30'
+    USER_ROLE = '10'
+    EUSER_ROLE = '20'
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(64),unique=True,index=True,nullable=False)
+    email = db.Column(db.String(128),unique=True,index=True,nullable=False)
+    _password =	db.Column('password',db.String(256),unique=True,nullable=False)
+    role = db.Column(db.SmallInteger, default=USER_ROLE)
+    
+    @property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, row_password):
+        self._password = generate_password_hash(row_password)
+
+    def check_password(self, row_password):
+        result = check_password_hash(self._password,row_password)
+        return result
